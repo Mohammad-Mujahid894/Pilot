@@ -2981,13 +2981,11 @@ body{
 }
     
   
-/* Performance safeguards */
+
+
+/* Safe performance rules */
 img{max-width:100%;height:auto}
-section{content-visibility:auto;contain-intrinsic-size:1px 900px}
-#home,#about{content-visibility:visible}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
+@media (prefers-reduced-motion:reduce){#nebula,.scroll-down{animation:none!important}}
 </style>
 </head>
 <body>
@@ -3050,7 +3048,6 @@ section{content-visibility:auto;contain-intrinsic-size:1px 900px}
 <!-- Scroll down arrow -->
 <div class="scroll-down">↓</div>
 </div>
-
 </section>
 <section class="wrap" id="about">
 <div class="about-container" style="display:flex; flex-wrap:nowrap; gap:40px; align-items:flex-start; justify-content:flex-start;">
@@ -3410,7 +3407,7 @@ and making processes faster, cleaner, and scalable.
 </div>
 <div class="skills-tab">
 <h3></h3>
-<iframe allowfullscreen="" loading="lazy" src="https://mohammad-mujahid894.github.io/Skills_Constellation/" style="width:100%; height:80vh; border:none;" title="Interactive skills constellation">
+<iframe allowfullscreen="" src="https://mohammad-mujahid894.github.io/Skills_Constellation/" style="width:100%; height:80vh; border:none;" title="Interactive skills constellation">
 </iframe>
 <!-- Button to view full page -->
 <div class="full-view-btn-container">
@@ -3438,7 +3435,7 @@ and making processes faster, cleaner, and scalable.
 <div class="cert-slider-container">
 <button aria-label="Previous certificate" class="cert-arrow left">‹</button>
 <div class="cert-slider" id="certSlider">
-<img alt="Information Security IS Elite Advocate" class="cert-slide" decoding="async" loading="lazy" src="Elite.png"/>
+<img alt="Information Security IS Elite Advocate" class="cert-slide" decoding="async" src="Elite.png"/>
 <img alt="Accenture We Innovate Certificate of Recognition" class="cert-slide" decoding="async" loading="lazy" src="certificates/1.PNG"/>
 <img alt="Recognition Certificate for Innovation Contribution" class="cert-slide" decoding="async" loading="lazy" src="certificates/2.PNG"/>
 <img alt="Accenture We Innovate Achievement Certificate" class="cert-slide" decoding="async" loading="lazy" src="certificates/2.1.png"/>
@@ -3494,19 +3491,19 @@ and making processes faster, cleaner, and scalable.
   </p>
 <!-- Image Preview Card -->
 <div class="aperian-card">
-<img alt="Aperian GlobeSmart Profile Preview" class="aperian-preview" decoding="async" loading="lazy" src="./Aperian.png">
+<img alt="Aperian GlobeSmart Profile Preview" class="aperian-preview" decoding="async" loading="lazy" src="./Aperian.png"/>
 <!-- Actions -->
 <div class="aperian-actions">
 <a download="" href="./Mohammad_Mujahid_Aperian.pdf" title="Download PDF">⬇️</a>
 <button onclick="event.stopPropagation(); openAperianModal();" title="Expand View">⛶</button>
 </div>
-</img></div>
+</div>
 </section>
 <!-- ===== EXPANDED IMAGE MODAL ===== -->
 <div class="aperian-modal" id="aperianModal" onclick="closeAperianModal();">
 <div class="aperian-modal-inner">
-<img alt="Expanded Aperian GlobeSmart Profile" decoding="async" loading="lazy" src="./Aperian.png">
-</img></div>
+<img alt="Expanded Aperian GlobeSmart Profile" decoding="async" loading="lazy" src="./Aperian.png"/>
+</div>
 </div>
 <!-- ===== VERIFIED CREDLY BADGES ===== -->
 <section class="cert-section credly-strip">
@@ -3522,8 +3519,8 @@ and making processes faster, cleaner, and scalable.
 <!-- ===== AGENTIC AI EXPANDED IMAGE MODAL ===== -->
 <div class="aperian-modal" id="agenticModal" onclick="closeAgenticModal();">
 <div class="aperian-modal-inner">
-<img alt="Expanded Agentic AI Certificate" decoding="async" loading="lazy" src="certificates/StanfordAgenticAI.png">
-</img></div>
+<img alt="Expanded Agentic AI Certificate" decoding="async" loading="lazy" src="certificates/StanfordAgenticAI.png"/>
+</div>
 </div>
 <section class="cert-section innovation-scope">
 <h2 class="section-title">
@@ -3536,13 +3533,13 @@ and making processes faster, cleaner, and scalable.
 <!-- Preview Card -->
 <div class="aperian-card">
 <!-- Certificate Image -->
-<img alt="" class="aperian-preview" decoding="async" loading="lazy" src="certificates/StanfordAgenticAI.png">
+<img alt="" class="aperian-preview" decoding="async" loading="lazy" src="certificates/StanfordAgenticAI.png"/>
 <!-- ACTION ROW -->
 <div class="aperian-actions">
 <a download="" href="certificates/StanfordAI.pdf" title="Download Certificate">⬇️</a>
 <button onclick="event.stopPropagation(); openAgenticModal();" title="Expand View">⛶</button>
 </div>
-</img></div>
+</div>
 </section>
 <!-- ================= GALLUP STRENGTHS SECTION ================= -->
 <section id="gallup-section" style="margin-top:60px;">
@@ -3760,8 +3757,6 @@ I Lead with Relationship Building
 </a>
 </div>
 </div>
-
-
 <!-- Fullscreen QR modal -->
 <div class="qr-modal" id="qr-modal">
 <div class="qr-modal-backdrop"></div>
@@ -3777,57 +3772,26 @@ I Lead with Relationship Building
 </section>
 </main>
 <script>
-    /* ========= Parallax starfields (3 layers for depth) ========= */
-    const DPR = Math.min(2, window.devicePixelRatio || 1);
-    const layers = [
-      { id: 'stars1', count: 110, speed: 0.15, size: 1.0 }, // far
-      { id: 'stars2', count: 90, speed: 0.35, size: 1.6 }, // mid
-      { id: 'stars3', count: 60,  speed: 0.65, size: 2.0 }  // near
-    ];
-
-    function Starfield(layer){
-      const cvs = document.getElementById(layer.id); const ctx = cvs.getContext('2d');
-      let w, h, stars=[]; let mx=0, my=0; // parallax
-      function resize(){ w = cvs.width = innerWidth * DPR; h = cvs.height = innerHeight * DPR; cvs.style.width = innerWidth+'px'; cvs.style.height = innerHeight+'px';
-        stars = Array.from({length: layer.count}, ()=>({ x: Math.random()*w, y: Math.random()*h, a: Math.random()*0.7+0.2 })); }
-      resize(); addEventListener('resize', resize);
-      addEventListener('mousemove', (e)=>{ mx = (e.clientX/innerWidth - .5); my = (e.clientY/innerHeight - .5); });
-      function draw(){ ctx.clearRect(0,0,w,h); ctx.fillStyle = '#fff';
-        for(const s of stars){ const px = s.x + mx*20*layer.speed; const py = s.y + my*20*layer.speed; ctx.globalAlpha = s.a; ctx.fillRect(px, py, layer.size*DPR, layer.size*DPR); }
-        requestAnimationFrame(draw); }
-      draw();
-      return {ctx, get size(){return {w,h}}, pushMeteor};
-
-      function pushMeteor(x,y,vx,vy){ // gradient trail line
-        const grad = ctx.createLinearGradient(x,y, x-vx*14, y-vy*14);
-        grad.addColorStop(0,'rgba(255,255,255,.95)'); grad.addColorStop(1,'rgba(122,162,255,0)');
-        ctx.strokeStyle = grad; ctx.lineWidth = 1.5*DPR; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-vx*14, y-vy*14); ctx.stroke();
-      }
-    }
-    const fields = layers.map(Starfield);
-    let starFrame = 0;
-    function renderStars(){
-      if(document.visibilityState === 'visible') fields.forEach(field => field.draw());
-      starFrame = requestAnimationFrame(renderStars);
-    }
-    renderStars();
-
-    /* ========= Glitter comet cursor ========= */
-    const sparks=[]; let last=0; function spawnSpark(x,y){ const s=document.createElement('span'); s.className='spark'; s.style.left=x+'px'; s.style.top=y+'px'; document.body.appendChild(s); sparks.push(s); if(sparks.length>40){ const old=sparks.shift(); old.remove(); } setTimeout(()=>s.remove(), 900); }
-    addEventListener('mousemove', (e)=>{ if(matchMedia('(pointer:fine)').matches) { const now=performance.now(); if(now-last>12){ spawnSpark(e.clientX, e.clientY); last=now; } } });
-
-    /* ========= 3D Hover Tilt ========= */
-    const tilts = [...document.querySelectorAll('.tilt')];
-    tilts.forEach(el=>{
-      el.addEventListener('mousemove', (e)=>{ const r = el.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width; const y = (e.clientY - r.top) / r.height; const rx = (0.5 - y) * 10; const ry = (x - 0.5) * 10; el.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
-      el.addEventListener('mouseleave', ()=>{ el.style.transform = 'rotateX(0deg) rotateY(0deg)'; });
-    });
-
-
-    /* ========= Reduce motion toggle ========= */
-    let motionReduced = false; function toggleMotion(){ motionReduced = !motionReduced; document.body.style.setProperty('animation-play-state', motionReduced ? 'paused' : 'running'); }
-    window.toggleMotion = toggleMotion;
-  </script>
+/* Optimized three-layer parallax stars; meteors removed. */
+(()=>{
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine=matchMedia('(pointer:fine)').matches;
+const dpr=Math.min(1.5,devicePixelRatio||1);
+const configs=[{id:'stars1',count:90,speed:.15,size:1},{id:'stars2',count:70,speed:.35,size:1.5},{id:'stars3',count:45,speed:.65,size:2}];
+let mx=0,my=0,pending=false;
+const fields=configs.map(c=>{const canvas=document.getElementById(c.id),ctx=canvas.getContext('2d');let w,h,stars;
+function resize(){w=canvas.width=Math.round(innerWidth*dpr);h=canvas.height=Math.round(innerHeight*dpr);canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';stars=Array.from({length:c.count},()=>({x:Math.random()*w,y:Math.random()*h,a:Math.random()*.7+.2}));}
+function draw(){ctx.clearRect(0,0,w,h);ctx.fillStyle='#fff';for(const s of stars){ctx.globalAlpha=s.a;ctx.fillRect(s.x+mx*20*c.speed,s.y+my*20*c.speed,c.size*dpr,c.size*dpr);}ctx.globalAlpha=1;}
+resize();return{resize,draw};});
+function render(){pending=false;if(document.visibilityState==='visible')fields.forEach(f=>f.draw());}
+function queue(){if(!pending){pending=true;requestAnimationFrame(render);}}
+addEventListener('resize',()=>{fields.forEach(f=>f.resize());queue();},{passive:true});
+if(fine&&!reduced)addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;queue();},{passive:true});
+document.addEventListener('visibilitychange',queue);queue();
+if(fine&&!reduced){const sparks=[];let last=0;addEventListener('mousemove',e=>{const now=performance.now();if(now-last<40)return;last=now;const q=document.createElement('span');q.className='spark';q.style.left=e.clientX+'px';q.style.top=e.clientY+'px';document.body.appendChild(q);sparks.push(q);if(sparks.length>16)sparks.shift()?.remove();setTimeout(()=>q.remove(),700);},{passive:true});}
+document.querySelectorAll('.tilt').forEach(el=>{el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;el.style.transform=`rotateX(${(0.5-y)*10}deg) rotateY(${(x-0.5)*10}deg)`;},{passive:true});el.addEventListener('mouseleave',()=>el.style.transform='rotateX(0deg) rotateY(0deg)');});
+})();
+</script>
 <script>
   function goHome() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3965,7 +3929,6 @@ if (qaMeetBtn) {
 
   timelineItems.forEach(item => observerTimeline.observe(item));
 </script>
-
 <script>
 const texts = [
   "Order to Cash New Associate",
